@@ -1,16 +1,20 @@
-const mongoose = require('mongoose');
-const mongoosePaginate = require('mongoose-paginate-v2');
-const Schema = mongoose.Schema;
+import mongoose, { model, PaginateModel } from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2';
+import Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
+export interface IRole {
 
-const rolechema = new Schema({
-    
-    name: { type: String, required: false, unique: false },
-});
+    name: string;
+
+}
+const rolechema = new Schema<IRole>({
+
+    name: {
+        type: String, required: false, unique: false,
+    }
+    });
 
 rolechema.plugin(mongoosePaginate);
-const Role = mongoose.model("Role", rolechema);
-// const newrole = new roleModel({ name: 'admin' });
-// newrole.save();
 
-module.exports = Role;
+export const Role = model<IRole, PaginateModel<IRole>>('Comment', rolechema);
+
