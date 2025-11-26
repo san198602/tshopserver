@@ -1,17 +1,17 @@
 import multer from 'multer';
 import express from 'express'; // Assuming you are using Express
+import path from 'path';
 const uploadRouter = express.Router();
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads/');
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + '-' + file.originalname);
+    destination : "uploads/",
+    
+    filename: (req, file, callback) => {
+        callback(null, Date.now() + '-' + file.originalname);
+        // callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
     }
 });
 
-var upload = multer({ dest: './uploads' });
-//const upload = multer({ storage: storage });
+const upload = multer({ storage: storage });
 
 
 import { UploadController } from '../controllers/upload.controller';
