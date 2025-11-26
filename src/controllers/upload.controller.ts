@@ -1,6 +1,6 @@
 import fs from "fs";
 import express from 'express';
-var upload = require("../models/upload.model");
+import {upload}  from "../models/uploads.model";
 export class UploadController {
 
     public createUpload(req: express.Request, res: express.Response, next: express.NextFunction): any {
@@ -21,41 +21,40 @@ export class UploadController {
                 return res.status(500).send('Error reading file.');
             }
 
-            //saveCSV(data);
+            let up = new upload({
+                fileType: "String",
+                originalFileName: "String",
+                uploadedBy: "String",
+                csvData: data,
+                data: data,
 
-            var allItems = data.split("\n");
 
-            console.log(allItems);
+            })
+            try {
+                up.save()
+                    .then((response: any) => {
+
+                        console.log("Upload successfully");
+                    })
+                    .catch((error: any) => {
+                        console.log(error);
+                    })
+            } catch (error) {
+
+                console.log(error);
+            }
+
+
+            /// var allItems = data.split("\n");
+
+            //console.log(allItems);
 
         });
 
     };
 
 
-    public saveCSV(_data: any, _file: any) {
-        let up = new upload({
-            fileType: "String",
-            originalFileName: "String",
-            uploadedBy: "String",
-            csvData: _data,
-            data: _data,
 
-
-        })
-        try {
-            up.save()
-                .then((response: any) => {
-
-                    console.log("Upload successfully");
-                })
-                .catch((error: any) => {
-                    console.log(error);
-                })
-        } catch (error) {
-
-            console.log(error);
-        }
-    };
 
 }
 
