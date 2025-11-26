@@ -10,7 +10,8 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({ storage: storage });
+var upload = multer({ dest: './uploads' });
+//const upload = multer({ storage: storage });
 
 
 import { UploadController } from '../controllers/upload.controller';
