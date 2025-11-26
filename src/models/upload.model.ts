@@ -1,12 +1,25 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
-mongoose.Promise = global.Promise;
-const mongoosePaginate = require('mongoose-paginate-v2');
+import mongoose from 'mongoose';
 
-const UploadSchema = new Schema({
-    
-   // _id: false,
-    
+
+import mongoosePaginate from 'mongoose-paginate-v2';
+import { model, PaginateModel } from 'mongoose';
+const Schema = mongoose.Schema;
+mongoose.Promise = global.Promise;
+
+
+export interface IUpload {
+    originalFileName: string,
+    fileType: string,
+    dataType: string;
+    data: string;
+    csvData: Buffer;
+    uploadedBy: String,
+    isProcessed: Boolean,
+    status: String,
+    message: String,
+    markDelete: Boolean,
+}
+const UploadSchema = new Schema<IUpload>({
     csvData: { type: Buffer, required: false },
     data: { type: String, required: false },
     dataType: { type: String, required: false },
@@ -17,12 +30,8 @@ const UploadSchema = new Schema({
     status: { type: String, default: null },
     message: { type: String, required: false },
     markDelete: { type: Boolean, default: false },
-    
-   
-
-
-}, {
-    timestamps: true, // Enable timestamps
 });
 UploadSchema.plugin(mongoosePaginate);
-module.exports = mongoose.model('Upload', UploadSchema);
+
+
+export const upload = model<IUpload, PaginateModel<IUpload>>('Upload', UploadSchema);

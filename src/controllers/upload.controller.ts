@@ -20,12 +20,12 @@ export class UploadController {
                 console.error('Error reading file:', err);
                 return res.status(500).send('Error reading file.');
             }
-            console.log(data);
+
             //saveCSV(data);
 
+            var allItems = data.split("\n");
 
-
-
+            console.log(allItems);
 
         });
 
