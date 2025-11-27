@@ -36,6 +36,7 @@
     "express": "^5.1.0",
     "mongoose": "^9.0.0",
     "mongoose-paginate-v2": "^1.9.1",
-    "multer": "^2.0.2"
+    "multer": "^2.0.2",
+    "tsconfig-paths": "^4.2.0"
   }
 }
