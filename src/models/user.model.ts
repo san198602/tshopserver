@@ -8,6 +8,21 @@ const UserSchema = new Schema<IUser>({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     age: { type: Number },
+   
+    favoriteFoods: {
+        type: [String],
+        required: false,
+        unique: false
+    },
+    password: {
+        type: String,
+        required: true,
+        unique: false
+    },
+    date: {
+        type: Date,
+        default: Date.now,
+    },
 });
- UserSchema.plugin(mongoosePaginate);
- export const UserModel = model<IUser, PaginateModel<IUser>>('User', UserSchema);
+UserSchema.plugin(mongoosePaginate);
+export const UserModel = model<IUser, PaginateModel<IUser>>('User', UserSchema);

@@ -1,6 +1,8 @@
 import fs from "fs";
 import express from 'express';
-import {upload}  from "../models/uploads.model";
+
+import path from 'path';
+import { Upload } from "../models/uploads.model";
 export class UploadController {
 
     public createUpload(req: express.Request, res: express.Response, next: express.NextFunction): any {
@@ -21,40 +23,47 @@ export class UploadController {
                 return res.status(500).send('Error reading file.');
             }
 
-            let up = new upload({
-                fileType: "String",
-                originalFileName: "String",
-                uploadedBy: "String",
-                csvData: data,
-                data: data,
 
 
-            })
-            try {
-                up.save()
-                    .then((response: any) => {
+            //var allItems = data.split("\n");
+            var allItems = data.replace(/[\n\r]/g, '')
 
-                        console.log("Upload successfully");
-                    })
-                    .catch((error: any) => {
-                        console.log(error);
-                    })
-            } catch (error) {
 
-                console.log(error);
+            for (let i = 0; i < allItems.length; i++) {
+                allItems.split(",");
+                var trainno = allItems[0];
+                console.log(trainno);
             }
 
-
-            /// var allItems = data.split("\n");
-
-            //console.log(allItems);
+            try {
+                fs.unlinkSync("uploads/" + fileName);
+                console.log('File successfully deleted');
+            } catch (err) {
+                console.error('Error deleting file:', err);
+            }
 
         });
 
     };
+    public saveData(data: any): String {
+        let upload = new Upload({
+            fileType: "String",
+            originalFileName: "String",
+            uploadedBy: "String",
+            csvData: data,
+            data: data,
 
 
+        })
+        upload.save()
+            .then((response: any) => {
+                return "Upload successfully";
 
-
+            })
+            .catch((error: any) => {
+                console.log(error);
+            })
+        return "Upload successfully";
+    }
 }
 

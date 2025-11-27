@@ -31,4 +31,4 @@ const UploadSchema = new Schema<IUpload>({
 UploadSchema.plugin(mongoosePaginate);
 
 
-export const upload = model<IUpload, PaginateModel<IUpload>>('Upload', UploadSchema);
+export const Upload = model<IUpload, PaginateModel<IUpload>>('Upload', UploadSchema);
