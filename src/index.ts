@@ -8,12 +8,15 @@ import * as dotenv from 'dotenv';
 
 import { connectMongoose } from "./db/connectToMongoDB";
 import index from "./routes/index";
+//import {} from "./utils/generateKey";
 
 connectMongoose();
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 8080;
+//const HOSTNAME = process.env.NODE_HOST;
+const HOSTNAME = '172.18.155.34';
 
 app.use(express.json({ limit: '10mb' }));
 app.use(
@@ -47,9 +50,25 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', index);
-const server = http.createServer(app)
-server.listen(PORT, () => {
-    console.log(`SERVER RUNNING ON http://localhost:${PORT}/`);
-});
+
+
+//const server = http.createServer(app)
+// const server = http.createServer((req, res) => {
+// res.statusCode = 200;
+// res.setHeader('Content-Type', 'application/json');
+// res.end('Hello World\n');
+// });
+
+ 
+    app.listen(PORT, HOSTNAME, () => {
+      console.log(`Server running at http://${HOSTNAME}:${PORT}/`);
+    });
+
+// server.listen(PORT,HOST,() => {
+//     //console.log(`SERVER RUNNING ON http://localhost:${PORT}/`);
+//      console.log(`Server running at http://${HOST}:${PORT}/`);
+// });
+
+
 
 module.exports = app;
