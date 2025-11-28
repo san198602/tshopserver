@@ -11,7 +11,7 @@ export interface Icomment {
     postId: Number,
     name: string;
     email: string;
-    body?: String; // Optional property
+    body: String; 
 }
 
 const commentSchema = new Schema<Icomment>({

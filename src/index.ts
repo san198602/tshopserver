@@ -1,6 +1,5 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import http from 'http';
 import cors from 'cors';
 import compression from "compression";
 import cookieParser from "cookie-parser"
@@ -16,7 +15,10 @@ dotenv.config();
 const app = express();
 const PORT = 8080;
 //const HOSTNAME = process.env.NODE_HOST;
-const HOSTNAME = '172.18.155.34';
+//const HOSTNAME = '172.18.155.34';
+const HOSTNAME = '10.251.1.34';
+
+
 
 app.use(express.json({ limit: '10mb' }));
 app.use(

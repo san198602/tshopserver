@@ -20,7 +20,7 @@ export class CommentController {
         collation: {
             locale: 'en',
         },
-        customLabels: myCustomLabels,
+      //  customLabels: myCustomLabels,
 
     };
 
