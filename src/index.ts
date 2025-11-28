@@ -20,7 +20,7 @@ const HOSTNAME = '172.18.155.34';
 
 app.use(express.json({ limit: '10mb' }));
 app.use(
-  express.urlencoded({ limit: '10mb', extended: true, parameterLimit: 50000 }),
+    express.urlencoded({ limit: '10mb', extended: true, parameterLimit: 50000 }),
 );
 
 
@@ -50,25 +50,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', index);
-
-
-//const server = http.createServer(app)
-// const server = http.createServer((req, res) => {
-// res.statusCode = 200;
-// res.setHeader('Content-Type', 'application/json');
-// res.end('Hello World\n');
-// });
-
- 
-    app.listen(PORT, HOSTNAME, () => {
-      console.log(`Server running at http://${HOSTNAME}:${PORT}/`);
-    });
-
-// server.listen(PORT,HOST,() => {
-//     //console.log(`SERVER RUNNING ON http://localhost:${PORT}/`);
-//      console.log(`Server running at http://${HOST}:${PORT}/`);
-// });
-
-
-
+app.listen(PORT, HOSTNAME, () => {
+    console.log(`Server running at http://${HOSTNAME}:${PORT}/`);
+});
 module.exports = app;
